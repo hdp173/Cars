@@ -25,7 +25,7 @@ namespace MyCars.Controllers
         [HttpGet("/api/makes")]
         public async Task<IEnumerable<MakeResource>> GetMakes()
         {
-            var makes = await context.Makes.Include(m => m.Models).ToListAsync();
+            var makes = await context.Makes.Include(m => m.Models).OrderBy(m=>m.Name).ToListAsync();
             return mapper.Map<List<Make>, List<MakeResource>>(makes);
         }
     }
