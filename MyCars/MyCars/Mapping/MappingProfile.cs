@@ -14,6 +14,7 @@ namespace MyCars.Mapping
         {
             CreateMap<Make, MakeResource>();
             CreateMap<Model, ModelResource>();
+            CreateMap<Feature, KeyValuePairResource>();
         }
     }
 }
