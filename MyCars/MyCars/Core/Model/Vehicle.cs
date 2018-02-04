@@ -14,7 +14,7 @@ namespace MyCars.Core.Model
         public int Id { get; set; }
         public int ModelId { get; set; }
         public Model Model { get; set; }
-        public bool IsRegistered { get; set; }
+        public bool IsOwned { get; set; }
         [Required]
         [StringLength(255)]
         public string ContactName { get; set; }
@@ -24,7 +24,8 @@ namespace MyCars.Core.Model
 
         [Required]
         [StringLength(255)]
-        public string ContactPhone { get; set; }
+        public string ContactPhone { get; set; }        
+        public decimal? Price { get; set; }
         public DateTime LastUpdate { get; set; }
         public ICollection<VehicleFeature> Features { get; set; }
         public ICollection<Photo> Photos { get; set; }
