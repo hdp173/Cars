@@ -47,6 +47,8 @@ export class VehicleFormComponent implements OnInit {
 
     if (this.vehicle.id)
       sources.push(this.vehicleService.getVehicle(this.vehicle.id));
+    else
+      this.vehicle.id = 0;
 
     Observable.forkJoin(sources).subscribe(data => {
       this.makes = data[0];

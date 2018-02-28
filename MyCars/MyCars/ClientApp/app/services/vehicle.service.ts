@@ -28,6 +28,22 @@ export class VehicleService {
     .map(res => res.json());
   }
 
+  getVehicles(filter: any) {
+    return this.http.get('/api/vehicles/' + '?' + this.toQueryString(filter))
+      .map(res => res.json());
+  }
+
+  toQueryString(obj: any) {
+    var parts = [];
+    for (var property in obj) {
+      var value = obj[property];
+      if (value != null && value != undefined) 
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+    }
+
+    return parts.join('&');
+  }
+
   update(vehicle: SaveVehicle) {
     return this.http.put('/api/vehicles/' + vehicle.id, vehicle)
     .map(res => res.json());
