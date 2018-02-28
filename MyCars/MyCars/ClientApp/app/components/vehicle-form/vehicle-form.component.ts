@@ -92,9 +92,30 @@ private setVehicle(v: Vehicle) {
   }
 
   submit() {
-    this.vehicleService.create(this.vehicle)
-    .subscribe(
-      x => console.log(x)
+    if(this.vehicle.id) {
+      this.vehicleService.update(this.vehicle)
+      .subscribe(x => {
+        this.toastyService.success({
+          title: 'Success',
+          msg: 'The vehicle was sucessfully updated.',
+          theme: 'bootstrap',
+          showClose: true,
+          timeout: 5000
+        })
+      })
+    }
+    else    
+      this.vehicleService.create(this.vehicle)
+      .subscribe(
+        x => console.log(this.vehicle)
+    )      
+  }
+
+  delete() {
+    if(confirm("Are you sure?"))
+      this.vehicleService.delete(this.vehicle.id)
+      .subscribe(
+        x => this.router.navigate(['/home'])
     )      
   }
 }

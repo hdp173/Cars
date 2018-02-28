@@ -55,6 +55,7 @@ namespace MyCars.Controllers
                 return NotFound();
 
             mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource, vehicle);
+            
             vehicle.LastUpdate = DateTime.Now;
             
             await unitOfWork.CompleteAsync();
