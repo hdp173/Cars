@@ -9,6 +9,7 @@ export class AppErrorHandler implements ErrorHandler {
   }
 
   handleError(error: any): void {
+    this.ngZone.run(() => {
     if (typeof(window) !== 'undefined') {
         this.toastyService.error({
         title: 'Error',
@@ -17,7 +18,7 @@ export class AppErrorHandler implements ErrorHandler {
         showClose: true,
         timeout: 5000
         });
-    }    
+    }});
 
     if (!isDevMode())
       Raven.captureException(error.originalError || error);
