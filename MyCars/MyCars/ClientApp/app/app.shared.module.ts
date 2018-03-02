@@ -1,10 +1,12 @@
+import { ProgressService, BrowserXhrWithProgress } from './services/progress.service';
+import { PhotoService } from './services/photo.service';
 import * as Raven from 'raven-js';
 import { FormsModule }  from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastyModule } from 'ng2-toasty';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpModule, BrowserXhr } from '@angular/http';
 import { VehicleService } from './services/vehicle.service';
 
 import { AppComponent } from './components/app/app.component';
@@ -17,6 +19,7 @@ import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error-handler';
 import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 import { PaginationComponent } from './shared/pagination.component';
+import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
 
 Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').install();
 
@@ -29,7 +32,8 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
         HomeComponent,
         VehicleFormComponent,
         VehicleListComponent,
-        PaginationComponent
+        PaginationComponent,
+        ViewVehicleComponent
     ],
     imports: [
         FormsModule,
@@ -39,7 +43,8 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'vehicles/new', component: VehicleFormComponent},
-            { path: 'vehicles/:id', component: VehicleFormComponent},
+            { path: 'vehicles/edit/:id', component: ViewVehicleComponent},
+            { path: 'vehicles/:id', component: ViewVehicleComponent},
             { path: 'vehicles', component: VehicleListComponent },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
@@ -49,7 +54,10 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
-        VehicleService
+        { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        VehicleService,
+        PhotoService,
+        ProgressService
     ]
 })
 export class AppModuleShared {
