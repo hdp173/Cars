@@ -20,6 +20,7 @@ import { AppErrorHandler } from './app.error-handler';
 import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 import { PaginationComponent } from './shared/pagination.component';
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
+import { AuthService } from './services/auth.service';
 
 Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').install();
 
@@ -55,9 +56,11 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
         { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        AuthService,
         VehicleService,
         PhotoService,
         ProgressService
+        
     ]
 })
 export class AppModuleShared {
