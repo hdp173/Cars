@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/auth-guard.service';
 import { ProgressService, BrowserXhrWithProgress } from './services/progress.service';
 import { PhotoService } from './services/photo.service';
 import * as Raven from 'raven-js';
@@ -21,6 +22,7 @@ import { VehicleListComponent } from './components/vehicle-list/vehicle-list.com
 import { PaginationComponent } from './shared/pagination.component';
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
 import { AuthService } from './services/auth.service';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').install();
 
@@ -43,10 +45,10 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
         HttpModule,            
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'vehicles/new', component: VehicleFormComponent},
-            { path: 'vehicles/edit/:id', component: ViewVehicleComponent},
-            { path: 'vehicles/:id', component: ViewVehicleComponent},
-            { path: 'vehicles', component: VehicleListComponent },
+            { path: 'vehicles/new', component: VehicleFormComponent, canActivate: [ AuthGuard ]},
+            { path: 'vehicles/edit/:id', component: ViewVehicleComponent, canActivate: [ AuthGuard ]},
+            { path: 'vehicles/:id', component: ViewVehicleComponent, canActivate: [ AuthGuard ]},
+            { path: 'vehicles', component: VehicleListComponent, canActivate: [ AuthGuard ]},
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
@@ -54,13 +56,12 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
         ])
     ],
     providers: [
-        { provide: ErrorHandler, useClass: AppErrorHandler },
-        { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        { provide: ErrorHandler, useClass: AppErrorHandler },        
+        AuthGuard,
+        AUTH_PROVIDERS,
         AuthService,
         VehicleService,
-        PhotoService,
-        ProgressService
-        
+        PhotoService              
     ]
 })
 export class AppModuleShared {

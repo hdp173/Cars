@@ -2,11 +2,12 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { SaveVehicle } from '../models/vehicle';
+import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 
 @Injectable()
 export class VehicleService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authHttp: AuthHttp) { }
 
   getMakes() {
     return this.http.get('/api/makes')
@@ -19,7 +20,8 @@ export class VehicleService {
   }
 
   create(vehicle: any) {
-    return this.http.post('/api/vehicles', vehicle)
+    console.log(this.authHttp);
+    return this.authHttp.post('/api/vehicles', vehicle)
     .map(res => res.json());
   }
 
@@ -45,12 +47,12 @@ export class VehicleService {
   }
 
   update(vehicle: SaveVehicle) {
-    return this.http.put('/api/vehicles/' + vehicle.id, vehicle)
+    return this.authHttp.put('/api/vehicles/' + vehicle.id, vehicle)
     .map(res => res.json());
   }
 
   delete(id: number) {
-    return this.http.delete('/api/vehicles/' + id)
+    return this.authHttp.delete('/api/vehicles/' + id)
     .map(res => res.json());
   }
 }
