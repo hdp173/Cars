@@ -9,6 +9,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { CommonModule } from '@angular/common';
 import { HttpModule, BrowserXhr } from '@angular/http';
 import { VehicleService } from './services/vehicle.service';
+import { ChartModule } from 'angular2-chartjs';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -42,7 +43,8 @@ Raven.config('https://c4c75e3fea7945e8b2b59af0f2fdca33@sentry.io/294069').instal
         FormsModule,
         ToastyModule.forRoot(),
         CommonModule,
-        HttpModule,            
+        HttpModule,         
+        ChartModule,   
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'vehicles/new', component: VehicleFormComponent, canActivate: [ AuthGuard ]},

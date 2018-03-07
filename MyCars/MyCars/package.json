@@ -58,6 +58,7 @@
     "to-string-loader": "1.1.5",
     "typescript": "2.4.1",
     "url-loader": "0.5.9",
+    "webpack-cli": "^2.0.10",
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0",
     "zone.js": "0.8.12"
@@ -65,10 +66,13 @@
   "dependencies": {
     "@reactivex/rxjs": "^5.5.3",
     "@types/underscore": "^1.8.7",
+    "angular2-chartjs": "^0.4.1",
     "angular2-jwt": "^0.2.3",
     "auth0-lock": "^11.3.1",
+    "chart.js": "^2.7.2",
     "ng2-toasty": "^2.5.0",
     "raven-js": "^3.22.3",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "webpack": "^4.1.0"
   }
 }

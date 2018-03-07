@@ -15,10 +15,12 @@ const treeShakableModules = [
     'zone.js'
 ];
 const nonTreeShakableModules = [
+    'angular2-chartjs',
     'angular2-jwt',    
     'auth0-lock',
     'bootstrap',
     'bootstrap/dist/css/bootstrap.css',
+    'chart.js',
     'es6-promise',
     'es6-shim',
     'event-source-polyfill',
@@ -74,7 +76,7 @@ module.exports = (env) => {
                 name: '[name]_[hash]'
             })
         ].concat(isDevBuild ? [] : [
-            new webpack.optimize.UglifyJsPlugin()
+            //new webpack.optimize.UglifyJsPlugin()
         ])
     });
 
