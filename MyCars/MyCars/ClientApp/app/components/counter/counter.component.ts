@@ -9,14 +9,16 @@ export class CounterComponent implements OnInit {
     ngOnInit() { }
 
     data = {
-        labels: ['BMW', 'Audi', 'Mazda'],
+        labels: ['BMW', 'Audi', 'Mazda', 'Opel', 'Toyota'],
         datasets: [
             { 
                 data: [5, 3, 1],
                 backgroundColor: [
                     "#ff6384",
                     "#36a2eb",
-                    "#ffce56"
+                    "#ffce56",
+                    '#8cc442',
+                    '#c13a8d'
                 ]
             }
         ]
