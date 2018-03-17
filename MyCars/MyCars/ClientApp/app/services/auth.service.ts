@@ -12,7 +12,7 @@ export class AuthService {
     domain: 'mycars.auth0.com',
     responseType: 'token id_token',
     audience: 'https://api.mycars.com',
-    redirectUri: 'http://mycars20180307.azurewebsites.net',
+    redirectUri: 'http://mycarspro.azurewebsites.net',
     scope: 'openid email'
   });
 
@@ -40,7 +40,6 @@ export class AuthService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log(authResult);
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);
