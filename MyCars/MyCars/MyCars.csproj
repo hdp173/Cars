@@ -28,7 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\MyCars20180307 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\MyCars20180307052018 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\MyCarsProd - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\mycarsproduction - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\app\services\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
